@@ -7,19 +7,25 @@
     <title>Trivia Game</title>
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Crete+Round&display=swap" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="assets/javascript/app.js"></script>
+    
 </head>
 
 <body>
     <header><h1>Triva Game</h1></header>
     <main>
-        <form>
-            <input type="radio" name="gender" value="male" checked> Box 1<br>
-            <input type="radio" name="gender" value="female"> Box 2<br>
-            <input type="radio" name="gender" value="other"> Box 3<br>
-            <input type="radio" name="gender" value="other"> Box 4<br>
-        </form>
+        <section id = 'questAnswer'>
+            <h3 id = 'question'>Question Number</h3>
+            <form>
+                <input type="radio" name="gender" value="male" checked> <p id = 'answerOne'>Answer One</p> <br>
+                <input type="radio" name="gender" value="female"> <p id = 'answerTwo'>Answer Two</p> <br>
+                <input type="radio" name="gender" value="other"> <p id = 'answerThree'>Answer Three</p> <br>
+                <input type="radio" name="gender" value="other"> <p id = 'answerFour'>ANswer Four</p> <br>
+            </form>
+        </section>
     </main>
 
 </body>
