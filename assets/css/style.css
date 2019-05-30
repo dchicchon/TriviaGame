@@ -1,10 +1,12 @@
 body {
     font-family: 'Crete Round', serif;
     text-align: center;
+    background-image: url(../images/astro-astronomy-background-956999.jpg)
 }
 
 
 h1 {
+    color: white;
     margin-top: 20px;
     font-size: 60px;
 }
@@ -15,6 +17,7 @@ main {
     width: 70%;
     margin: 20px auto;
     border: 1px solid black;
+    background: white;
 }
 
 section {
