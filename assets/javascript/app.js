@@ -30,15 +30,26 @@ $( document ).ready(function() {
             }
         }
     ]
+
+    // This for loop goes through the list of questions
     for (i=0; i<questions.length; i++) {
-        var questionName = questions[i].q
-        $('#question').append('<h3>'+questionName+ '</h3>')
-        $('#question').text(questionName)
+
+        var questAnswerDiv = $("<div class = 'questAnswer'>");
+        // Assigns the variable questionName to the question at element 0
+        var questionName = questions[i].q;
+
+        // At element id #question, we append a new element <h3> with the questionName.
+
+        $(questAnswerDiv).append('<h3>'+questionName+ '</h3>')
+        
         var answerName = Object.keys(questions[i].a)
-        $('#answerOne').text(answerName[0])
-        $('#answerTwo').text(answerName[1])
-        $('#answerThree').text(answerName[2])
-        $('#answerFour').text(answerName[3])
+        $(questAnswerDiv).append('<p>'+ answerName[0] + '</p>')
+        $(questAnswerDiv).append('<p>'+ answerName[1] + '</p>')
+        $(questAnswerDiv).append('<p>'+ answerName[2] + '</p>')
+        $(questAnswerDiv).append('<p>'+ answerName[3] + '</p>')
+
+        $("main").append(questAnswerDiv);
+        
     }
 
     
