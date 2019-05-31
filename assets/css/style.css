@@ -1,23 +1,36 @@
 body {
-    font-family: 'Crete Round', serif;
+    font-family: 'Space Mono', monospace;
     text-align: center;
-    background-image: url(../images/astro-astronomy-background-956999.jpg)
+    background-image: url(https://i.pinimg.com/originals/ef/e4/91/efe4911c1514bd6da486c87cab240f60.gif);
+    background-size: cover
+    
 }
-
 
 h1 {
     color: white;
     margin-top: 20px;
     font-size: 60px;
+    
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    width: auto;
 }
+
+@keyframes example {
+    from {color:#00519d;}
+    to {color: yellow;}
+    
+}
+
 h3 {
     font-size: 30px;
 }
 main {
     width: 70%;
     margin: 20px auto;
-    border: 1px solid black;
-    background: white;
+    border: 3px solid blue;
+    background: #00519d;
 }
 
 section {

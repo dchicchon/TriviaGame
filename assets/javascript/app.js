@@ -28,6 +28,17 @@ $( document ).ready(function() {
                 'Green': false,
                 'purple': true
             }
+        },
+
+        questionFour = {
+            'q': 'Where is the ocean',
+            'a': {
+                'Blue': false,
+                'Yellow': false,
+                'Green': false,
+                'purple': true
+            }
+                  
         }
     ]
 
