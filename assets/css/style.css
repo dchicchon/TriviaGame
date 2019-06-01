@@ -30,8 +30,23 @@ h1 {
     
 }
 
+@keyframes questions {
+    from {color: aquamarine;}
+    to {color: gold;}
+}
+
+@keyframes answers {
+    from {color: springgreen;}
+    to {color: turquoise;}
+}
+
 h3 {
     font-size: 30px;
+    animation-name: questions;
+    animation-duration: 3s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    width: auto;
 }
 main {
     width: 70%;
@@ -45,6 +60,11 @@ section {
 }
 p {
     font-size: 18px;
+    animation-name: answers;
+    animation-duration: 0.5s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    width: auto;
 }
 
 .questAnswer{
