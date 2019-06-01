@@ -1,18 +1,25 @@
 body {
-    font-family: 'Space Mono', monospace;
+    font-family: myFirstFont;
     text-align: center;
     background-image: url(https://i.pinimg.com/originals/ef/e4/91/efe4911c1514bd6da486c87cab240f60.gif);
     background-size: cover
     
 }
 
+@font-face{
+    font-family: myFirstFont;
+    src: url(../font/nasalization-rg.ttf)
+}
+
 h1 {
     color: white;
     margin-top: 20px;
     font-size: 60px;
+    font-weight: 800;
     
     animation-name: example;
-    animation-duration: 4s;
+    animation-duration: 2s;
+    animation-direction: alternate;
     animation-iteration-count: infinite;
     width: auto;
 }
@@ -42,4 +49,9 @@ p {
 
 .questAnswer{
     margin: 20px;
+}
+
+embed {
+    height: 0px;
+    width: 0px;
 }
