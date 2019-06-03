@@ -70,8 +70,7 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }
-                  
+            }     
         },
 
         questionEight = {
@@ -81,8 +80,7 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }
-                  
+            }         
         },
 
         questionNine = {
@@ -103,37 +101,59 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }
-                  
+            }   
         }
-
-
-
     ]
+
+    function timeUp() {
+        alert('Your times up!')
+    }
+    
+
+    // $('main').hide()
+    var intro = $('<div class = "intro">')
+    $(intro).append('<p>' + 'Welcome to Space Trivia! Here you will test your knowledge of the world beyond our own. You will have 5 minutes to complete ten questions. Good luck!'+ '</p>')
+    $(intro).append('<button id = "start">Click to Start!</button>')
+    $('section').append(intro)
+    
 
 
     // This for loop goes through the list of questions
-    for (i=0; i<questions.length; i++) {
 
-        var questAnswerDiv = $("<div class = 'questAnswer'>");
-        // Assigns the variable questionName to the question at element 0
-        var questionName = questions[i].q;
+    $('#start').on('click',function() {
+        $('section').hide()
+        $('main').show()
+        var min = 0.5;
+        var sec = min * 60;
+        var millisec = sec * 1000
 
-        // At element id #question, we append a new element <h3> with the questionName.
-
-        $(questAnswerDiv).append('<h3>'+questionName+ '</h3>')
-
+        setTimeout(timeUp, millisec)   
+    
         
-        var answerName = Object.keys(questions[i].a)
+        for (i=0; i<questions.length; i++) {
 
-        $(questAnswerDiv).append('<p>'+ answerName[0] + '</p>')
-        $(questAnswerDiv).append('<p>'+ answerName[1] + '</p>')
-        $(questAnswerDiv).append('<p>'+ answerName[2] + '</p>')
-        $(questAnswerDiv).append('<p>'+ answerName[3] + '</p>')
-
-        $("main").append(questAnswerDiv);
-        
-    }
+            var questAnswerDiv = $("<div class = 'questAnswer'>");
+            // Assigns the variable questionName to the question at element 0
+            var questionName = questions[i].q;
+    
+            // At element id #question, we append a new element <h3> with the questionName.
+    
+            $(questAnswerDiv).append('<h3>'+questionName+ '</h3>')
+    
+            
+            var answerName = Object.keys(questions[i].a)
+    
+            $(questAnswerDiv).append('<p>'+ answerName[0] + '</p>')
+            $(questAnswerDiv).append('<p>'+ answerName[1] + '</p>')
+            $(questAnswerDiv).append('<p>'+ answerName[2] + '</p>')
+            $(questAnswerDiv).append('<p>'+ answerName[3] + '</p>')
+    
+            $("main").append(questAnswerDiv);
+            
+        }
+    })
+    
+    
 
     // Music level property //
     $('#music').volume = 0.2

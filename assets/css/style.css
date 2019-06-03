@@ -10,6 +10,17 @@ body {
     font-family: myFirstFont;
     src: url(../font/nasalization-rg.ttf)
 }
+#start {
+    border: 1px solid #00519d;
+    background-color: #00519d;
+    color: white;
+    padding: 15px;
+    font-size: 25px;
+    font-family: myFirstFont;
+    border-radius: 12px;
+    margin-top: 50px;
+
+}
 
 h1 {
     color: white;
