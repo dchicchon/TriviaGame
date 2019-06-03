@@ -1,26 +1,27 @@
 $( document ).ready(function() {
 
+    
     // Variables //
     var questions = [
         questionOne = {
             'q': '1. What type of galaxy is the most common in the universe?',
             'a' : {
-                'one': 'Elliptical',
-                'two': 'Blue',
-                'three': 'Yellow',
-                'four': 'Green'
+                'Elliptical': true,
+                'two': false,
+                'three': false,
+                'four': false
             },
-            'correct': 'one'
+            'correct': 'Elliptical'
         },
         questionTwo = {
             'q': '2. What is the coldest place in the universe? (Hint: It’s a nebula.)',
             'a': {
-                'Blue': false,
-                'Yellow': false,
-                'Green': true,
+                'The Boomerang Nebula': true,
+                'two': false,
+                'three': true,
                 'purple': false
             },
-            'correct': 'one'
+            'correct': 'The Boomerang Nebula'
         },
         questionThree = {
             'q': '3. The hottest place in the universe is located in which constellation?',
@@ -30,106 +31,107 @@ $( document ).ready(function() {
                 'Green': false,
                 'purple': true
             },
-            'correct': 'one'
+            'correct': 'The constellation Virgo'
         },
 
         questionFour = {
             'q': '4. How old is the universe in years? (Plus or minus 1 billion years.)',
             'a': {
-                'Blue': false,
+                '13.8 billion years old': false,
                 'Yellow': false,
                 'Green': false,
                 'purple': true
             },
-            'correct': 'one'
+            'correct': '13.8 billion years old'
         },
 
         questionFive = {
             'q': '5. What percent of the universe is dark matter? (Plus or minus 2%.)',
             'a': {
-                'Blue': false,
+                '27%': false,
                 'Yellow': false,
                 'Green': false,
                 'purple': true
             },
-            'correct': 'one'
+            'correct': '27%'
                   
         },
 
         questionSix = {
             'q': '6. How many planets are in the Solar System?',
             'a': {
-                'Blue': false,
+                'Eight planets': false,
                 'Yellow': false,
                 'Green': false,
                 'purple': true
             },
-            'correct': 'one'
+            'correct': 'Eight planets'
                   
         },
 
         questionSeven = {
             'q': '7. What is the largest planet in our solar system?',
             'a': {
-                'Blue': false,
+                'Jupiter': false,
                 'Yellow': false,
                 'Green': false,
                 'purple': true
             },
-            'correct': 'one'
+            'correct': 'Jupiter'
         },
 
         questionEight = {
             'q': '8. What is the smallest planet in our solar system?',
             'a': {
-                'Blue': false,
+                'Mercury': false,
                 'Yellow': false,
                 'Green': false,
                 'purple': true
             },
-            'correct': 'one'         
+            'correct': 'Mercury'         
         },
 
         questionNine = {
             'q': '9. What is the most common type of star found in the Milky Way?',
             'a': {
-                'Blue': false,
+                'Red dwarf stars': false,
                 'Yellow': false,
                 'Green': false,
                 'purple': true
             },
-            'correct': 'one'
+            'correct': 'Red dwarf stars'
                   
         },
 
         questionTen = {
             'q': '10. What is the largest type of star in the universe?',
             'a': {
-                'Blue': false,
+                'Red supergiant stars': false,
                 'Yellow': false,
                 'Green': false,
                 'purple': true
             },
-            'correct': 'one'   
+            'correct': 'Red supergiant stars'   
         }
     ]
 
+    
+
+
     var answers = []
 
+    for (k=0; k < questions.length; k++) {
+        answers.push(questions[k].correct)
+    }
+
+    console.log(answers)
+
     // Define Functions
-    
+
     function timeUp() {
         alert('Your times up!')
     }
     
-    function findAnswers() {
-        for (i=0;i<questions;i++) {
-            answers.push(questions[i].correct)
-        }
-    }
-
-    findAnswers()
-    console.log(answers)
     
 
     $('main').hide()
@@ -163,8 +165,8 @@ $( document ).ready(function() {
     
             var answerName = Object.keys(questions[i].a)
     
-            $(questAnswerDiv).append('<button class = "selection">'+ answerName[0].valueOf() + '</button>')
-            $(questAnswerDiv).append('<button class = "selection">'+ answerName[1] + '</button>')
+            $(questAnswerDiv).append('<button class = "selection" value =' + questions[i].a +'>' + answerName[0] + '</button>')
+            $(questAnswerDiv).append('<button class = "selection" value =' + questions[i].answerName + '>' + answerName[1] + '</button>')
             $(questAnswerDiv).append('<button class = "selection">'+ answerName[2] + '</button>')
             $(questAnswerDiv).append('<button class = "selection">'+ answerName[3] + '</button>')
 
@@ -172,11 +174,14 @@ $( document ).ready(function() {
 
             // Decisions based upon button selection and value //
 
-            $('.selection').on('click', function() {
-                console.log(questions[i].correct)
-                
-            })        
+                  
         }
+        $('.selection').on('click', function() {
+            var selected = $(this).val()
+            console.log(selected);
+
+            if (questions[selected][$(this).text()]
+        })  
     })
     
     

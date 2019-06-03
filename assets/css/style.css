@@ -118,6 +118,7 @@ p {
 button:hover {
     background-color: black;
     border-color: gold;
+    cursor: pointer;
 }
 
 button:focus {
