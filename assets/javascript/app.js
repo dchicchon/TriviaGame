@@ -110,7 +110,7 @@ $( document ).ready(function() {
     }
     
 
-    // $('main').hide()
+    $('main').hide()
     var intro = $('<div class = "intro">')
     $(intro).append('<p>' + 'Welcome to Space Trivia! Here you will test your knowledge of the world beyond our own. You will have 5 minutes to complete ten questions. Good luck!'+ '</p>')
     $(intro).append('<button id = "start">Click to Start!</button>')
@@ -123,7 +123,7 @@ $( document ).ready(function() {
     $('#start').on('click',function() {
         $('section').hide()
         $('main').show()
-        var min = 0.5;
+        var min = 5;
         var sec = min * 60;
         var millisec = sec * 1000
 
@@ -143,10 +143,10 @@ $( document ).ready(function() {
             
             var answerName = Object.keys(questions[i].a)
     
-            $(questAnswerDiv).append('<p>'+ answerName[0] + '</p>')
-            $(questAnswerDiv).append('<p>'+ answerName[1] + '</p>')
-            $(questAnswerDiv).append('<p>'+ answerName[2] + '</p>')
-            $(questAnswerDiv).append('<p>'+ answerName[3] + '</p>')
+            $(questAnswerDiv).append('<button class = "selection">'+ answerName[0] + '</button>')
+            $(questAnswerDiv).append('<button class = "selection">'+ answerName[1] + '</button>')
+            $(questAnswerDiv).append('<button class = "selection">'+ answerName[2] + '</button>')
+            $(questAnswerDiv).append('<button class = "selection">'+ answerName[3] + '</button>')
     
             $("main").append(questAnswerDiv);
             
