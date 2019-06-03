@@ -5,11 +5,12 @@ $( document ).ready(function() {
         questionOne = {
             'q': '1. What type of galaxy is the most common in the universe?',
             'a' : {
-                'Elliptical': true,
-                'Yellow': false,
-                'Green': false,
-                'Purple': false
-            }
+                'one': 'Elliptical',
+                'two': 'Blue',
+                'three': 'Yellow',
+                'four': 'Green'
+            },
+            'correct': 'one'
         },
         questionTwo = {
             'q': '2. What is the coldest place in the universe? (Hint: It’s a nebula.)',
@@ -18,7 +19,8 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': true,
                 'purple': false
-            }
+            },
+            'correct': 'one'
         },
         questionThree = {
             'q': '3. The hottest place in the universe is located in which constellation?',
@@ -27,7 +29,8 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }
+            },
+            'correct': 'one'
         },
 
         questionFour = {
@@ -37,8 +40,8 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }
-                  
+            },
+            'correct': 'one'
         },
 
         questionFive = {
@@ -48,7 +51,8 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }
+            },
+            'correct': 'one'
                   
         },
 
@@ -59,7 +63,8 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }
+            },
+            'correct': 'one'
                   
         },
 
@@ -70,7 +75,8 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }     
+            },
+            'correct': 'one'
         },
 
         questionEight = {
@@ -80,7 +86,8 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }         
+            },
+            'correct': 'one'         
         },
 
         questionNine = {
@@ -90,7 +97,8 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }
+            },
+            'correct': 'one'
                   
         },
 
@@ -101,13 +109,27 @@ $( document ).ready(function() {
                 'Yellow': false,
                 'Green': false,
                 'purple': true
-            }   
+            },
+            'correct': 'one'   
         }
     ]
 
+    var answers = []
+
+    // Define Functions
+    
     function timeUp() {
         alert('Your times up!')
     }
+    
+    function findAnswers() {
+        for (i=0;i<questions;i++) {
+            answers.push(questions[i].correct)
+        }
+    }
+
+    findAnswers()
+    console.log(answers)
     
 
     $('main').hide()
@@ -127,8 +149,7 @@ $( document ).ready(function() {
         var sec = min * 60;
         var millisec = sec * 1000
 
-        setTimeout(timeUp, millisec)   
-    
+        setTimeout(timeUp, millisec)
         
         for (i=0; i<questions.length; i++) {
 
@@ -140,16 +161,21 @@ $( document ).ready(function() {
     
             $(questAnswerDiv).append('<h3>'+questionName+ '</h3>')
     
-            
             var answerName = Object.keys(questions[i].a)
     
-            $(questAnswerDiv).append('<button class = "selection">'+ answerName[0] + '</button>')
+            $(questAnswerDiv).append('<button class = "selection">'+ answerName[0].valueOf() + '</button>')
             $(questAnswerDiv).append('<button class = "selection">'+ answerName[1] + '</button>')
             $(questAnswerDiv).append('<button class = "selection">'+ answerName[2] + '</button>')
             $(questAnswerDiv).append('<button class = "selection">'+ answerName[3] + '</button>')
-    
+
             $("main").append(questAnswerDiv);
-            
+
+            // Decisions based upon button selection and value //
+
+            $('.selection').on('click', function() {
+                console.log(questions[i].correct)
+                
+            })        
         }
     })
     
