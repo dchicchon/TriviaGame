@@ -70,6 +70,12 @@ embed {
 
 /* Question and Answers Screen */
 
+#timer {
+    width: 50%;
+    height: 20%;
+    border: 1px solid blue;
+}
+
 h3 {
     font-size: 30px;
     animation-name: questions;

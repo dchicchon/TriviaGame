@@ -69,6 +69,10 @@ $( document ).ready(function() {
     function timeUp() {
         alert('Your times up!')
     }
+
+    // function setDecrement() {
+    //     var timeSecs = min * 60
+    // }
     
     
     $('main').hide()
@@ -77,7 +81,6 @@ $( document ).ready(function() {
     $(intro).append('<button id = "start">Click to Start!</button>')
     $('section').append(intro)
     
-
 
     // This for loop goes through the list of questions
 
@@ -89,6 +92,11 @@ $( document ).ready(function() {
         var millisec = sec * 1000
 
         setTimeout(timeUp, millisec)
+
+        // var seconds = setInterval(setDecrement,1000)
+        // console.log(seconds)
+        // var timer = $('<div id = timer>'+seconds+'</div>')
+        // $('body').append(timer)
         
         for (i=0; i<questions.length; i++) {
 
@@ -101,20 +109,26 @@ $( document ).ready(function() {
     
             $(questAnswerDiv).append('<h3>'+questionName+ '</h3>')
 
-            $(questAnswerDiv).append('<button class = "selection">' + questions[i].a[0] + '</button>')
-            $(questAnswerDiv).append('<button class = "selection">' + questions[i].a[1] + '</button>')
-            $(questAnswerDiv).append('<button class = "selection">'+ questions[i].a[2] + '</button>')
-            $(questAnswerDiv).append('<button class = "selection">'+ questions[i].a[3]  + '</button>')
+            var optionOne = $('<button class = "selection">' + questions[i].a[0] + '</button>')
+            $(optionOne).attr('data-value',questions[i].a[0])
+            var optionTwo = $('<button class = "selection">' + questions[i].a[1] + '</button>')
+            $(optionTwo).attr('data-value',questions[i].a[1])
+            var optionThree = $('<button class = "selection">' + questions[i].a[2] + '</button>')
+            $(optionThree).attr('data-value',questions[i].a[2])
+            var optionFour = $('<button class = "selection">' + questions[i].a[3] + '</button>')
+            $(optionFour).attr('data-value',questions[i].a[3])
+            $(questAnswerDiv).append(optionOne,optionTwo,optionThree,optionFour)
+            
 
             $("main").append(questAnswerDiv);
 
-            // Decisions based upon button selection and value //
-
-                  
+            
         }
 
+        // Decisions based upon button selection and value //
+
         $('.selection').on('click', function() {
-            var selected = $(this).val()
+            var selected = $(this).attr("data-value")
             console.log(selected);
         }) 
 
