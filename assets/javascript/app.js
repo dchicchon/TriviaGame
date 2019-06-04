@@ -78,11 +78,22 @@ $( document ).ready(function() {
         askQuestion()
     }
 
+    function setDecrement() {
+        
+    }
+
     function askQuestion() {
         $('main').empty()
         
         if (currentQuest != questions.length) {
-            setTimeout(timeUp, 15000)
+            var seconds = 15
+
+            setInterval(timeUp, seconds*1000)
+
+            
+
+
+            
 
             var questionAnswerDiv = $('<div class = questAnswer>')
             var answer = questions[currentQuest].correct
@@ -100,17 +111,26 @@ $( document ).ready(function() {
             $('.selection').on('click', function() {
                 var selected = $(this).attr("data-value")
                 if(selected === answer) {
+                    $(quest).append('<p> You Guessed Correct! Press "a" to continue. </p>')
                     correct = correct + 1
                     currentQuest++
-                    console.log(currentQuest)
-                    console.log('Correct: '+correct)
-                    askQuestion()
+                    document.onkeyup = function(event) {
+                        if (event.key === 'a') {
+                            askQuestion()
+                        }
+                    }
                 }
                 else {
+                    $(quest).append('<p> You Guessed Incorrect! The answer was '+ answer +'. Press "a" to continue</p>')
                     incorrect = incorrect + 1
                     currentQuest++
-                    console.log(currentQuest)
-                    askQuestion()
+                    document.onkeyup = function(event) {
+                        if (event.key === 'a') {
+                            askQuestion()
+                        }
+                    }
+                    
+                    
                 }
             })
         }
