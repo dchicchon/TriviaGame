@@ -4,9 +4,9 @@ $( document ).ready(function() {
     // Variables //
     var questions = [
         questionOne = {
-            'q': '1. What type of galaxy is the most common in the universe?',
-            'a' : ['eliptical', 'red', 'green', 'blue'],
-            'correct': 'Elliptical' 
+            'q': '1. How many large groups of rings does Saturn have?',
+            'a' : ['Four', 'Seven', 'Nine', 'Five'],
+            'correct': 'Four' 
         },
 
         questionTwo = {
@@ -64,15 +64,50 @@ $( document ).ready(function() {
         }
     ]
 
+    var correct = 0;
+    var currentQuest = 0;
+    
+
     // Define Functions
 
     function timeUp() {
-        alert('Your times up!')
+        alert('Your times up! The correct answer was: "' + questions[currentQuest].correct+ '"')
+        currentQuest++
+        askQuestion()
     }
 
-    // function setDecrement() {
-    //     var timeSecs = min * 60
-    // }
+    function askQuestion() {
+        $('main').empty()
+        setTimeout(timeUp, 15000)
+        var questionAnswerDiv = $('<div class = questAnswer>')
+        var answer = questions[currentQuest].correct
+        var quest = $('<h3>'+questions[currentQuest].q+'</h3>')
+        
+        for (i=0;i<questions[currentQuest].a.length;i++) {
+            var option = $('<button class = "selection">'+questions[currentQuest].a[i]+'</button>')
+            $(option).attr('data-value',questions[currentQuest].a[i])
+            $(quest).append(option)
+        }
+
+        $(questionAnswerDiv).append(quest)
+        $('main').append(questionAnswerDiv)
+
+        $('.selection').on('click', function() {
+            var selected = $(this).attr("data-value")
+            if(selected === answer) {
+                console.log('correct!')
+            }
+            else {
+                console.log('wrong answer!')
+            }
+            console.log(selected);
+        
+            
+            
+        }) 
+    }
+    
+    
     
     
     $('main').hide()
@@ -86,52 +121,73 @@ $( document ).ready(function() {
 
     $('#start').on('click',function() {
         $('section').hide()
+        askQuestion()
         $('main').show()
         var min = 5;
         var sec = min * 60;
-        var millisec = sec * 1000
+        
 
-        setTimeout(timeUp, millisec)
+        
+
+        
 
         // var seconds = setInterval(setDecrement,1000)
         // console.log(seconds)
         // var timer = $('<div id = timer>'+seconds+'</div>')
         // $('body').append(timer)
+
         
-        for (i=0; i<questions.length; i++) {
+        // for (i=0; i<questions.length; i++) {
 
-            var questAnswerDiv = $("<div class = 'questAnswer'>");
-            // Assigns the variable questionName to the question at element 0
-            var questionName = questions[i].q;
-            console.log(questionName)
+        //     var questAnswerDiv = $("<div class = 'questAnswer'>");
+        //     // Assigns the variable questionName to the question at element 0
+        //     var questionName = questions[i].q;
+        //     console.log(questionName)
     
-            // At element id #question, we append a new element <h3> with the questionName.
+        //     // At element id #question, we append a new element <h3> with the questionName.
     
-            $(questAnswerDiv).append('<h3>'+questionName+ '</h3>')
+        //     $(questAnswerDiv).append('<h3>'+questionName+ '</h3>')
 
-            var optionOne = $('<button class = "selection">' + questions[i].a[0] + '</button>')
-            $(optionOne).attr('data-value',questions[i].a[0])
-            var optionTwo = $('<button class = "selection">' + questions[i].a[1] + '</button>')
-            $(optionTwo).attr('data-value',questions[i].a[1])
-            var optionThree = $('<button class = "selection">' + questions[i].a[2] + '</button>')
-            $(optionThree).attr('data-value',questions[i].a[2])
-            var optionFour = $('<button class = "selection">' + questions[i].a[3] + '</button>')
-            $(optionFour).attr('data-value',questions[i].a[3])
-            $(questAnswerDiv).append(optionOne,optionTwo,optionThree,optionFour)
+        //     $(questAnswerDiv).attr('data-value',questions[i].correct)
             
-
-            $("main").append(questAnswerDiv);
-
             
-        }
+        //     var optionOne = $('<button type = radio class = "selection">' + questions[i].a[0] + '</button>')
+        //     $(optionOne).attr('data-value',questions[i].a[0])
+        //     $(optionOne).attr('data-index',i)
+            
+        //     var optionTwo = $('<button class = "selection">' + questions[i].a[1] + '</button>')
+        //     $(optionTwo).attr('data-value',questions[i].a[1])
+        //     $(optionTwo).attr('data-index',i)
+
+        //     var optionThree = $('<button class = "selection">' + questions[i].a[2] + '</button>')
+        //     $(optionThree).attr('data-value',questions[i].a[2])
+        //     $(optionThree).attr('data-index',i)
+
+        //     var optionFour = $('<button class = "selection">' + questions[i].a[3] + '</button>')
+        //     $(optionFour).attr('data-value',questions[i].a[3])
+        //     $(optionFour).attr('data-index',i)
+
+        //     $(questAnswerDiv).append(optionOne,optionTwo,optionThree,optionFour)
+
+        //     $("main").append(questAnswerDiv);
+        // }
 
         // Decisions based upon button selection and value //
 
-        $('.selection').on('click', function() {
-            var selected = $(this).attr("data-value")
-            console.log(selected);
-        }) 
-
+        // $('.selection').on('click', function() {
+        //     var selected = $(this).attr("data-value")
+        //     var index = $(this).attr('data-index')
+        //     if(selected === questions[index].correct) {
+        //         console.log('correct!')
+        //     }
+        //     else {
+        //         console.log('wrong answer!')
+        //     }
+        //     console.log(selected);
+        //     console.log(questions[index].correct)
+            
+            
+        // }) 
     })
     
     
