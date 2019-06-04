@@ -83,6 +83,7 @@ h3 {
     animation-direction: alternate;
     animation-iteration-count: infinite;
     width: auto;
+    margin-bottom: 5%;
 }
 
 main {
