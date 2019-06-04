@@ -71,33 +71,51 @@ $( document ).ready(function() {
 
     // Define Functions
 
-    function timeUp() {
-        alert('Your times up! The correct answer was: "' + questions[currentQuest].correct+ '"')
-        currentQuest++
-        console.log(currentQuest)
-        askQuestion()
-    }
+   
 
-    function setDecrement() {
-        
-    }
+    // function decrement() {
+    //     var seconds = 15;
+    //     seconds--;
+    //     $('#timer').html('<h2>' + seconds + '</h2>')
+    //     if (seconds === 0) {
+            // $(quest).append('<p>Times up! The correct answer was'+ answer + '. Press "a" to continue.</p>')
+            // document.onkeyup = function(event) {
+            //     if (event.key === 'a') {
+            //         askQuestion()
+    //             }
+    //         }
+    //     }
+    // }
 
     function askQuestion() {
         $('main').empty()
         
         if (currentQuest != questions.length) {
-            var seconds = 15
-
-            setInterval(timeUp, seconds*1000)
-
+            // var seconds = 15
             
-
-
             
+            // var current = setInterval(decrement,1000)
+
+            // var timer = $('<div id = timer>'+ current + '</div>')
+
+            // $('body').append(timer)
 
             var questionAnswerDiv = $('<div class = questAnswer>')
             var answer = questions[currentQuest].correct
             var quest = $('<h3>'+questions[currentQuest].q+'</h3>')
+
+            function timeUp() {
+                $('main').empty()
+                $('main').append('<p>Times up! The correct answer was '+ answer + '. Press "a" to continue.</p>')
+                currentQuest++
+                document.onkeyup = function(event) {
+                    if (event.key === 'a') {
+                        askQuestion()
+                    }
+                }    
+            }
+
+            setInterval(timeUp, 15000)
             
             for (i=0;i<questions[currentQuest].a.length;i++) {
                 var option = $('<button class = "selection">'+questions[currentQuest].a[i]+'</button>')
@@ -111,7 +129,7 @@ $( document ).ready(function() {
             $('.selection').on('click', function() {
                 var selected = $(this).attr("data-value")
                 if(selected === answer) {
-                    $(quest).append('<p> You Guessed Correct! Press "a" to continue. </p>')
+                    $(quest).append('<p = > You Guessed Correct! Press "a" to continue. </p>')
                     correct = correct + 1
                     currentQuest++
                     document.onkeyup = function(event) {
@@ -128,9 +146,7 @@ $( document ).ready(function() {
                         if (event.key === 'a') {
                             askQuestion()
                         }
-                    }
-                    
-                    
+                    }      
                 }
             })
         }
@@ -141,7 +157,7 @@ $( document ).ready(function() {
     
     $('main').hide()
     var intro = $('<div class = "intro">')
-    $(intro).append('<p>' + 'Welcome to Space Trivia! Here you will test your knowledge of the world beyond our own. You will have 5 minutes to complete ten questions. Good luck!'+ '</p>')
+    $(intro).append('<p>' + 'Welcome to Space Trivia! Here you will test your knowledge of the world beyond our own. You will have 15 seconds answer each question presented to you. Good luck!'+ '</p>')
     $(intro).append('<button id = "start">Click to Start!</button>')
     $('section').append(intro)
     
@@ -152,73 +168,7 @@ $( document ).ready(function() {
         $('section').hide()
         askQuestion()
         $('main').show()
-        var min = 5;
-        var sec = min * 60;
-        
-
-        
-
-        
-
-        // var seconds = setInterval(setDecrement,1000)
-        // console.log(seconds)
-        // var timer = $('<div id = timer>'+seconds+'</div>')
-        // $('body').append(timer)
-
-        
-        // for (i=0; i<questions.length; i++) {
-
-        //     var questAnswerDiv = $("<div class = 'questAnswer'>");
-        //     // Assigns the variable questionName to the question at element 0
-        //     var questionName = questions[i].q;
-        //     console.log(questionName)
-    
-        //     // At element id #question, we append a new element <h3> with the questionName.
-    
-        //     $(questAnswerDiv).append('<h3>'+questionName+ '</h3>')
-
-        //     $(questAnswerDiv).attr('data-value',questions[i].correct)
-            
-            
-        //     var optionOne = $('<button type = radio class = "selection">' + questions[i].a[0] + '</button>')
-        //     $(optionOne).attr('data-value',questions[i].a[0])
-        //     $(optionOne).attr('data-index',i)
-            
-        //     var optionTwo = $('<button class = "selection">' + questions[i].a[1] + '</button>')
-        //     $(optionTwo).attr('data-value',questions[i].a[1])
-        //     $(optionTwo).attr('data-index',i)
-
-        //     var optionThree = $('<button class = "selection">' + questions[i].a[2] + '</button>')
-        //     $(optionThree).attr('data-value',questions[i].a[2])
-        //     $(optionThree).attr('data-index',i)
-
-        //     var optionFour = $('<button class = "selection">' + questions[i].a[3] + '</button>')
-        //     $(optionFour).attr('data-value',questions[i].a[3])
-        //     $(optionFour).attr('data-index',i)
-
-        //     $(questAnswerDiv).append(optionOne,optionTwo,optionThree,optionFour)
-
-        //     $("main").append(questAnswerDiv);
-        // }
-
-        // Decisions based upon button selection and value //
-
-        // $('.selection').on('click', function() {
-        //     var selected = $(this).attr("data-value")
-        //     var index = $(this).attr('data-index')
-        //     if(selected === questions[index].correct) {
-        //         console.log('correct!')
-        //     }
-        //     else {
-        //         console.log('wrong answer!')
-        //     }
-        //     console.log(selected);
-        //     console.log(questions[index].correct)
-            
-            
-        // }) 
     })
-    
     
 
     // Music level property //
