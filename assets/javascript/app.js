@@ -5,31 +5,32 @@ $( document ).ready(function() {
     var questions = [
         questionOne = {
             'q': '1. How many large groups of rings does Saturn have?',
-            'a' : ['Four', 'Seven', 'Nine', 'Five'],
+            'a': ['Four', 'Seven', 'Nine', 'Five'],
             'correct': 'Four' 
-        },
+        }, 
 
         questionTwo = {
-            'q': '2. What is the coldest place in the universe? (Hint: It’s a nebula.)',
-            'a': ['The Boomerang Nebula','blue','red','green'],
-            'correct': 'The Boomerang Nebula'
+            'q': '2. How much of the Earth is covered in water?',
+            'a': ['75%','85%','90%','50%'],
+            'correct': '75%'
         },
+
         questionThree = {
-            'q': '3. The hottest place in the universe is located in which constellation?',
-            'a': [],
-            'correct': 'The constellation Virgo'
+            'q': '3. What is the sun?',
+            'a': ['Planet','Star','Comet','Nebula'],
+            'correct': 'Star'
         },
 
         questionFour = {
-            'q': '4. How old is the universe in years? (Plus or minus 1 billion years.)',
-            'a': ['a','b','c','d'],
-            'correct': 'a'
+            'q': '4. What is the furthest planet from the sun?',
+            'a': ['Uranus','Neptune','Saturn','Jupiter'],
+            'correct': 'Neptune'
         },
 
         questionFive = {
-            'q': '5. What percent of the universe is dark matter? (Plus or minus 2%.)',
-            'a': ['a','b','c','d'],
-            'correct': 'b'
+            'q': 'What is the hottest planet in the solar system?',
+            'a': ['Mercury','Venus','Mars','Earth'],
+            'correct': 'Mercury'
         },
 
         questionSix = {
@@ -51,19 +52,19 @@ $( document ).ready(function() {
         },
 
         questionNine = {
-            'q': '9. What is the most common type of star found in the Milky Way?',
-            'a': ['a','b','c','d'],
-            'correct': 'c'
+            'q': '9. What is the most abundant element found in the universe?',
+            'a': ['Helium','Carbon','Hydrogen','Uranium'],
+            'correct': 'Hydrogen'
                   
         },
 
         questionTen = {
-            'q': '10. What is the largest type of star in the universe?',
-            'a': ['a','b','c','d'],
-            'correct': 'd'   
+            'q': '10. Which planet has the famous Big Red Dot?',
+            'a': ['Mars','Jupiter','Saturn','Uranus'],
+            'correct': 'Jupiter'   
         }
     ]
-
+    var incorrect = 0;
     var correct = 0;
     var currentQuest = 0;
     
@@ -73,42 +74,50 @@ $( document ).ready(function() {
     function timeUp() {
         alert('Your times up! The correct answer was: "' + questions[currentQuest].correct+ '"')
         currentQuest++
+        console.log(currentQuest)
         askQuestion()
     }
 
     function askQuestion() {
         $('main').empty()
-        setTimeout(timeUp, 15000)
-        var questionAnswerDiv = $('<div class = questAnswer>')
-        var answer = questions[currentQuest].correct
-        var quest = $('<h3>'+questions[currentQuest].q+'</h3>')
         
-        for (i=0;i<questions[currentQuest].a.length;i++) {
-            var option = $('<button class = "selection">'+questions[currentQuest].a[i]+'</button>')
-            $(option).attr('data-value',questions[currentQuest].a[i])
-            $(quest).append(option)
+        if (currentQuest != questions.length) {
+            setTimeout(timeUp, 15000)
+
+            var questionAnswerDiv = $('<div class = questAnswer>')
+            var answer = questions[currentQuest].correct
+            var quest = $('<h3>'+questions[currentQuest].q+'</h3>')
+            
+            for (i=0;i<questions[currentQuest].a.length;i++) {
+                var option = $('<button class = "selection">'+questions[currentQuest].a[i]+'</button>')
+                $(option).attr('data-value',questions[currentQuest].a[i])
+                $(quest).append(option)
+            }
+
+            $(questionAnswerDiv).append(quest)
+            $('main').append(questionAnswerDiv)
+
+            $('.selection').on('click', function() {
+                var selected = $(this).attr("data-value")
+                if(selected === answer) {
+                    correct = correct + 1
+                    currentQuest++
+                    console.log(currentQuest)
+                    console.log('Correct: '+correct)
+                    askQuestion()
+                }
+                else {
+                    incorrect = incorrect + 1
+                    currentQuest++
+                    console.log(currentQuest)
+                    askQuestion()
+                }
+            })
         }
-
-        $(questionAnswerDiv).append(quest)
-        $('main').append(questionAnswerDiv)
-
-        $('.selection').on('click', function() {
-            var selected = $(this).attr("data-value")
-            if(selected === answer) {
-                console.log('correct!')
-            }
-            else {
-                console.log('wrong answer!')
-            }
-            console.log(selected);
-        
-            
-            
-        }) 
+        else {
+            $('main').append('<h3>Thank you for taking the quiz! You got '+ correct+' out of '+ questions.length+' questions correct.</h3>')
+        } 
     }
-    
-    
-    
     
     $('main').hide()
     var intro = $('<div class = "intro">')
