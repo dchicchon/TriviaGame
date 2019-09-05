@@ -116,7 +116,6 @@ $(document).ready(function () {
 
             // Timer
             function countdown() {
-                console.log(timer)
                 timer--
                 if (timer === 0) {
                     clearInterval(incrementer)
