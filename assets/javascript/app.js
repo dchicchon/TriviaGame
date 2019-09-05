@@ -6,6 +6,7 @@
 // The user will have to click 'a' to continue on to the next question.
 // If the user clicks on the correct answer before the time is up, I will display a success message and wait for the user to type 'a' to continue on to the next question
 // Once all of the questions have been asked, we will be brought into a final score screen to show the user their score. I will also give them the option to play the game again if they would like
+// Show Timer to User
 
 // Stretch Goals
 // Add a database that will keep track of a leaderboard for the users score. E.g. Enter your name!
@@ -113,10 +114,11 @@ $(document).ready(function () {
 
             // Here we grab the question based on the value of currentQuest
             var quest = $('<h3>' + questions[currentQuest].q + '</h3>')
-
             // Timer
             function countdown() {
                 timer--
+                $(timerDiv).text(`Time: ${timer}`)
+                console.log(timer)
                 if (timer === 0) {
                     clearInterval(incrementer)
                     $('main').empty()
@@ -138,16 +140,17 @@ $(document).ready(function () {
             var incrementer = setInterval(countdown, 1000 * 1)
 
             // This is happening throughout the incrementer as a callback
+            $(questionAnswerDiv).append(quest);
+            var timerDiv = $(`<div id="timer">Time: ${timer}</div>`);
+            $(questionAnswerDiv).append(timerDiv);
 
             // Set interval for 15 seconds with function countdown
-
             for (i = 0; i < questions[currentQuest].a.length; i++) {
                 var option = $('<button class = "selection">' + questions[currentQuest].a[i] + '</button>')
                 $(option).attr('data-value', questions[currentQuest].a[i])
-                $(quest).append(option)
+                $(questionAnswerDiv).append(option)
             }
 
-            $(questionAnswerDiv).append(quest)
             $('main').append(questionAnswerDiv)
 
             $('.selection').on('click', function () {
@@ -160,7 +163,6 @@ $(document).ready(function () {
 
                     // Here we clear the timer
                     clearInterval(incrementer)
-
                     $(quest).append('<p = > You Guessed Correct! Press "a" to continue. </p>')
                     correct = correct + 1
                     currentQuest++
@@ -171,6 +173,7 @@ $(document).ready(function () {
                     }
                 }
                 else {
+
                     clearInterval(incrementer)
                     $(quest).append('<p> You Guessed Incorrect! The answer was ' + answer + '. Press "a" to continue</p>')
                     incorrect = incorrect + 1
