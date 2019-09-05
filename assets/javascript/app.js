@@ -97,10 +97,6 @@ $(document).ready(function () {
 
     // Define Functions
 
-
-
-
-
     // What does this function do? It looks a little gnarly. I should probably split this one up into multiple functions or just hardcode it.
     function askQuestion() {
 
