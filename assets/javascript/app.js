@@ -25,8 +25,8 @@ $(document).ready(function () {
 
         questionOne = {
             'q': '1. How many large groups of rings does Saturn have?',
-            'a': ['Four', 'Seven', 'Nine', 'Five'],
-            'correct': 'Four'
+            'a': ['Three', 'Seven', 'Nine', 'Five'],
+            'correct': 'Three'
         },
 
         questionTwo = {
