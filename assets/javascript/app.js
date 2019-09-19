@@ -17,6 +17,7 @@
 $(document).ready(function () {
 
 
+
     // List of questions
     // Structure ===========
     // key of question = 1 Value
@@ -101,6 +102,7 @@ $(document).ready(function () {
     // Current Question Number
     var currentQuest = 0;
 
+    $("#high-scores").hide()
 
     // Define Functions
 
@@ -128,13 +130,12 @@ $(document).ready(function () {
                 if (timer === 0) {
                     clearInterval(incrementer)
                     $('main').empty()
-                    $('main').append('<p>Times up! The correct answer was ' + answer + '. Press "a" to continue.</p>')
+                    $('main').append('<p>Times up! The correct answer was ' + answer + '.</p>')
+                    $('main').append('<button class="selection" type="button" id="next">Next</button>')
+                    $("#next").on('click', function () {
+                        askQuestion()
+                    })
                     currentQuest++
-                    document.onkeyup = function (event) {
-                        if (event.key === 'a') {
-                            askQuestion()
-                        }
-                    }
                 }
 
             }
@@ -212,7 +213,9 @@ $(document).ready(function () {
             })
         }
         else {
-            $('main').append('<h3>You got ' + correct + ' out of ' + questions.length + ' questions correct.</h3>');
+            $("#high-scores").show();
+            $('main').append('<h3>You got ' + correct + ' out of ' + questions.length + ' questions correct!</h3>');
+            $("main").append("<p id='label'>Add your name to the High Score List</p><input placeholder='Enter your name'></input><br/>")
             $('main').append("<button class='selection' type='button' id='play-again'>Play Again?</button>");
 
             // Reset Function

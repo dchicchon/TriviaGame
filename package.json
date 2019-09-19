@@ -1,0 +1,27 @@
+{
+  "name": "TriviaGame",
+  "version": "1.0.0",
+  "description": "![Site Screenshot](assets/images/site-screenshot.png)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dchicchon/TriviaGame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dchicchon/TriviaGame/issues"
+  },
+  "homepage": "https://github.com/dchicchon/TriviaGame#readme",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "express-sessions": "^1.0.6",
+    "mongoose": "^5.7.1"
+  }
+}
