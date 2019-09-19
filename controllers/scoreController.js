@@ -1,4 +1,4 @@
-const Animal = require("../models/Animal")
+const Score = require("../models/Score")
 
 module.exports = {
     getScore: (req, res) => {
@@ -11,6 +11,7 @@ module.exports = {
     },
 
     createScore: (req, res) => {
+        console.log(req.body)
         Score.create(req.body)
             .then(dbScore => {
                 console.log(dbScore)
