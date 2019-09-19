@@ -86,6 +86,12 @@ $(document).ready(function () {
         }
     ]
 
+    // Trivia API
+    // $.ajax('https://opentdb.com/api.php?amount=20&category=17&difficulty=medium&type=multiple')
+    //     .then(res => {
+    //         console.log(res)
+    //     })
+
     // Number of Incorrect Answers
     var incorrect = 0;
 
@@ -143,14 +149,16 @@ $(document).ready(function () {
             $(questionAnswerDiv).append(quest);
             var timerDiv = $(`<div id="timer">Time: ${timer}</div>`);
             $(questionAnswerDiv).append(timerDiv);
-
+            var optionsDiv = $("<div id='options'></div>")
+            // $(questionAnswerDiv).append(optionsDiv)
             // Set interval for 15 seconds with function countdown
             for (i = 0; i < questions[currentQuest].a.length; i++) {
                 var option = $('<button class = "selection">' + questions[currentQuest].a[i] + '</button>')
                 $(option).attr('data-value', questions[currentQuest].a[i])
-                $(questionAnswerDiv).append(option)
+                $(optionsDiv).append(option)
+                // $(questionAnswerDiv).append(option)
             }
-
+            $(questionAnswerDiv).append(optionsDiv)
             $('main').append(questionAnswerDiv)
 
             $('.selection').on('click', function () {
@@ -161,33 +169,59 @@ $(document).ready(function () {
                 // This will occur if the user selects the right answer
                 if (selected === answer) {
 
+                    // Hide options after selection
+                    $(optionsDiv).hide();
+                    $(timerDiv).hide();
+
                     // Here we clear the timer
                     clearInterval(incrementer)
-                    $(quest).append('<p = > You Guessed Correct! Press "a" to continue. </p>')
+                    $(quest).append('<p = > You Guessed Correct! Click to continue</p>')
+                    $(quest).append('<button class="selection" type="button" id="next">Next</button>')
+
                     correct = correct + 1
                     currentQuest++
-                    document.onkeyup = function (event) {
-                        if (event.key === 'a') {
-                            askQuestion()
-                        }
-                    }
+
+                    $("#next").on('click', function () {
+                        askQuestion()
+                    })
+                    // document.onkeyup = function (event) {
+                    //     if (event.key === 'a') {
+                    //         askQuestion()
+                    //     }
+                    // }
                 }
                 else {
-
+                    // Hide options after selection
+                    $(optionsDiv).hide();
+                    $(timerDiv).hide();
                     clearInterval(incrementer)
-                    $(quest).append('<p> You Guessed Incorrect! The answer was ' + answer + '. Press "a" to continue</p>')
+                    $(quest).append('<p> You Guessed Incorrect! The answer was ' + answer + '.</p>')
                     incorrect = incorrect + 1
                     currentQuest++
-                    document.onkeyup = function (event) {
-                        if (event.key === 'a') {
-                            askQuestion()
-                        }
-                    }
+                    $(quest).append('<button class="selection" type="button" id="next">Next</button>')
+
+                    $("#next").on('click', function () {
+                        askQuestion()
+                    })
+                    // document.onkeyup = function (event) {
+                    //     if (event.key === 'a') {
+                    //         askQuestion()
+                    //     }
+                    // }
                 }
             })
         }
         else {
-            $('main').append('<h3>Thank you for taking the quiz! You got ' + correct + ' out of ' + questions.length + ' questions correct.</h3>')
+            $('main').append('<h3>You got ' + correct + ' out of ' + questions.length + ' questions correct.</h3>');
+            $('main').append("<button class='selection' type='button' id='play-again'>Play Again?</button>");
+
+            // Reset Function
+            $("#play-again").on("click", function () {
+                currentQuest = 0;
+                correct = 0;
+                incorrect = 0;
+                askQuestion()
+            })
         }
     }
 
