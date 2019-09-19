@@ -1,17 +1,18 @@
 const express = require("express");
 const session = require("express-session");
 const app = express();
+const mongoose = require("mongoose")
+const uri = process.env.MONGODB_URI || "mongodb://localhost/trivia"
 require("dotenv").config();
-
-
+global.db = mongoose.createConnection(uri, { useNewUrlParser: true });
 const routes = require("./routes")
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static("client/build"))
-}
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static("client/build"))
+// }
 
 app.use(session({
     key: 'user_sid',
@@ -24,9 +25,10 @@ app.use(session({
     }
 }))
 
-app.use(routes)
+app.use('/api', routes)
 
-const server = app.listen(process.env.PORT || 5000, function () {
-    let port = server.address().port;
-    console.log(`Server is listening on PORT ${port}`)
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log("Server listening on PORT:", PORT)
 })
