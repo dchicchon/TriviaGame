@@ -2,6 +2,7 @@ const Score = require("../models/Score")
 
 module.exports = {
     getScore: (req, res) => {
+        console.log("Get Controller")
         Score.find()
             .then(dbScore => {
                 console.log(dbScore)
@@ -11,20 +12,11 @@ module.exports = {
     },
 
     createScore: (req, res) => {
-        console.log(req.body)
+        console.log("Post Controller")
         Score.create(req.body)
             .then(dbScore => {
-                console.log(dbScore)
-                res.json(dbScore)
+                // console.log(dbScore)
+                res.send("Success");
             })
-    },
-
-    // deleteAnimal: (req, res) => {
-    //     Animal.findByIdAndDelete(
-    //         req.params.id)
-    //         .then(dbScore => {
-    //             console.log("Animal Deleted");
-    //             res.json("Animal Deleted")
-    //         })
-    // }
+    }
 }

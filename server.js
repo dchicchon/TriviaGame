@@ -5,15 +5,14 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const uri = process.env.MONGODB_URI || "mongodb://localhost/trivia"
 require("dotenv").config();
+
+// Global DB
 global.db = mongoose.createConnection(uri, { useNewUrlParser: true });
-// const routes = require("./routes")
+
+const routes = require("./routes")
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
-
-// if (process.env.NODE_ENV === 'production') {
-//     app.use(express.static("client/build"))
-// }
 
 app.use(session({
     key: 'user_sid',
@@ -26,19 +25,13 @@ app.use(session({
     }
 }))
 
-// app.configure(function () {
-//     app.use(express.static(__dirname + '/static'));
+app.use(express.static('public'))
+
+// app.get('*', function (req, res) {
+//     res.sendFile(__dirname + '/index.html');
 // });
 
-
-
-app.use(express.static(__dirname + '/public'))
-
-app.get('*', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
-});
-
-// app.use('/api', routes)
+app.use('/api', routes)
 
 app.use(cors());
 app.use(function (req, res, next) {

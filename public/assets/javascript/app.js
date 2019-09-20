@@ -93,6 +93,10 @@ $(document).ready(function () {
     //         console.log(res)
     //     })
 
+
+
+
+
     // Number of Incorrect Answers
     var incorrect = 0;
 
@@ -102,7 +106,18 @@ $(document).ready(function () {
     // Current Question Number
     var currentQuest = 0;
 
-    $("#high-scores").hide()
+    // $("#high-scores").hide();
+    // $("#music").hide();
+
+    var show = $("<div id='show-section'><button class='selection' type ='button' id='show'>Music</button></div>")
+    $('html').append(show);
+
+    $("#show").on("click", function () {
+
+        $("#audio").append('<audio id="music" src="assets/sound/Space Soundtrack (Available Game Music).mp3" controls></audio>')
+        $("#music").show();
+        $("#music")[0].attributes[3].nodeValue = 0.5
+    });
 
     // Define Functions
 
@@ -126,7 +141,6 @@ $(document).ready(function () {
             function countdown() {
                 timer--
                 $(timerDiv).text(`Time: ${timer}`)
-                console.log(timer)
                 if (timer === 0) {
                     clearInterval(incrementer)
                     $('main').empty()
@@ -151,14 +165,13 @@ $(document).ready(function () {
             var timerDiv = $(`<div id="timer">Time: ${timer}</div>`);
             $(questionAnswerDiv).append(timerDiv);
             var optionsDiv = $("<div id='options'></div>")
-            // $(questionAnswerDiv).append(optionsDiv)
             // Set interval for 15 seconds with function countdown
             for (i = 0; i < questions[currentQuest].a.length; i++) {
                 var option = $('<button class = "selection">' + questions[currentQuest].a[i] + '</button>')
                 $(option).attr('data-value', questions[currentQuest].a[i])
                 $(optionsDiv).append(option)
-                // $(questionAnswerDiv).append(option)
             }
+
             $(questionAnswerDiv).append(optionsDiv)
             $('main').append(questionAnswerDiv)
 
@@ -185,12 +198,8 @@ $(document).ready(function () {
                     $("#next").on('click', function () {
                         askQuestion()
                     })
-                    // document.onkeyup = function (event) {
-                    //     if (event.key === 'a') {
-                    //         askQuestion()
-                    //     }
-                    // }
                 }
+
                 else {
                     // Hide options after selection
                     $(optionsDiv).hide();
@@ -204,19 +213,40 @@ $(document).ready(function () {
                     $("#next").on('click', function () {
                         askQuestion()
                     })
-                    // document.onkeyup = function (event) {
-                    //     if (event.key === 'a') {
-                    //         askQuestion()
-                    //     }
-                    // }
                 }
             })
         }
         else {
+
+            $("#high-scores").append("<h3>High Scores</h3>")
+            $("#high-scores").append("<table><tr><th>Name</th><th>Score</th></tr></table>")
+
+            // Get data from mongo database
+            $.get('/api/scores', function (data) {
+                console.log("response from db")
+                console.log(data)
+                for (let i = 0; i < data.length; i++) {
+                    $("table").append(`<tr><td>${data[i].name}</td><td>${data[i].score}</td></tr>`)
+                }
+            });
+
             $("#high-scores").show();
+
             $('main').append('<h3>You got ' + correct + ' out of ' + questions.length + ' questions correct!</h3>');
-            $("main").append("<p id='label'>Add your name to the High Score List</p><input placeholder='Enter your name'></input><br/>")
+            $("main").append("<p id='label'>Add your name to the High Score List</p><input id='name' placeholder='Enter your name'></input><button class='selection' type='button' id='submit'>Submit</button><br/>")
             $('main').append("<button class='selection' type='button' id='play-again'>Play Again?</button>");
+
+            // This is a post function eventually
+            $("#submit").on("click", function () {
+                let name = {
+                    name: $("#name").val(),
+                    score: correct
+                }
+
+                $.post("/api/scores", name, function () {
+                    console.log("Successfully Posted Data");
+                })
+            })
 
             // Reset Function
             $("#play-again").on("click", function () {
@@ -238,8 +268,9 @@ $(document).ready(function () {
     // When this button is clicked, the game should start
     $('#start').on('click', function () {
         // Here we hide the section element
-        $('section').hide()
-
+        $('section').hide();
+        $("#show").hide();
+        $("#music").hide();
         // We run the function askQuestion which will begin asking questions
         askQuestion()
 

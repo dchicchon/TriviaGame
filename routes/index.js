@@ -1,18 +1,16 @@
-// var router = require('express').Router();
 var express = require('express');
 var app = express();
-// var scoreController = require("../controllers/scoreController");
-// var path = require('path');
+var scoreController = require("../controllers/scoreController");
 
-// router.get("/scores", function (req, res) {
-//     console.log("Get")
-//     scoreController.getScore();
-// })
+app.get("/scores", function (req, res) {
+    console.log("Get")
+    scoreController.getScore(req, res);
+})
 
-// router.post("/scores", function (req, res) {
-//     console.log("Post");
-//     scoreController.createScore();
-// })
+app.post("/scores", function (req, res) {
+    console.log("Post");
+    scoreController.createScore(req, res);
+})
 
 app.get('/', function (req, res) {
     res.render('./index.html')
