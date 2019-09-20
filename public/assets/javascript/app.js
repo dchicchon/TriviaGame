@@ -225,7 +225,8 @@ $(document).ready(function () {
             $.get('/api/scores', function (data) {
                 console.log("response from db")
                 console.log(data)
-                for (let i = 0; i < data.length; i++) {
+                data.sort((a, b) => (a.score > b.score) ? 1 : -1)
+                for (let i = data.length - 1; i >= 0; i--) {
                     $("table").append(`<tr><td>${data[i].name}</td><td>${data[i].score}</td></tr>`)
                 }
             });
@@ -249,9 +250,13 @@ $(document).ready(function () {
                     $.get('/api/scores', function (data) {
                         console.log("response from db")
                         console.log(data)
+                        data.sort((a, b) => (a.score > b.score) ? 1 : -1)
                         $("#high-scores").append("<h3>High Scores</h3>")
                         $("#high-scores").append("<table><tr><th>Name</th><th>Score</th></tr></table>")
-                        for (let i = 0; i < data.length; i++) {
+                        // for (let i = 0; i < data.length; i++) {
+                        //     $("table").append(`<tr><td>${data[i].name}</td><td>${data[i].score}</td></tr>`)
+                        // }
+                        for (let i = data.length - 1; i >= 0; i--) {
                             $("table").append(`<tr><td>${data[i].name}</td><td>${data[i].score}</td></tr>`)
                         }
                     });
