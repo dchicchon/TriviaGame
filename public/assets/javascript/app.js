@@ -245,11 +245,22 @@ $(document).ready(function () {
 
                 $.post("/api/scores", name, function () {
                     console.log("Successfully Posted Data");
+                    $("#high-scores").empty();
+                    $.get('/api/scores', function (data) {
+                        console.log("response from db")
+                        console.log(data)
+                        $("#high-scores").append("<h3>High Scores</h3>")
+                        $("#high-scores").append("<table><tr><th>Name</th><th>Score</th></tr></table>")
+                        for (let i = 0; i < data.length; i++) {
+                            $("table").append(`<tr><td>${data[i].name}</td><td>${data[i].score}</td></tr>`)
+                        }
+                    });
                 })
             })
 
             // Reset Function
             $("#play-again").on("click", function () {
+                $("#high-scores").empty();
                 currentQuest = 0;
                 correct = 0;
                 incorrect = 0;
