@@ -1,8 +1,7 @@
 const express = require("express");
-const session = require("express-session");
 const app = express();
-const mongoose = require("mongoose")
-const cors = require("cors")
+const mongoose = require("mongoose");
+const cors = require("cors");
 const uri = process.env.MONGODB_URI || "mongodb://localhost/trivia"
 require("dotenv").config();
 
@@ -14,22 +13,7 @@ const routes = require("./routes")
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
-app.use(session({
-    key: 'user_sid',
-    secret: 'surf dogs',
-    resave: true,
-    saveUninitialized: false,
-    cookie: {
-        expires: 10800000,
-        httpOnly: false
-    }
-}))
-
 app.use(express.static('public'))
-
-// app.get('*', function (req, res) {
-//     res.sendFile(__dirname + '/index.html');
-// });
 
 app.use('/api', routes)
 
